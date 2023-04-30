@@ -45,13 +45,13 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 4, 26, 19, 30, 24, 794, DateTimeKind.Utc).AddTicks(3645),
+                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(831),
                             Name = "Test"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 4, 26, 19, 30, 24, 794, DateTimeKind.Utc).AddTicks(3652),
+                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(845),
                             Name = "Test1"
                         });
                 });
@@ -247,13 +247,13 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 4, 26, 19, 30, 24, 794, DateTimeKind.Utc).AddTicks(3683),
+                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(906),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 4, 26, 19, 30, 24, 794, DateTimeKind.Utc).AddTicks(3685),
+                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(911),
                             Name = "User"
                         });
                 });
@@ -326,6 +326,28 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(957),
+                            Email = "alakbarli",
+                            FirstName = "Nigar",
+                            LastName = "Alakbarli",
+                            Password = "123",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(963),
+                            Email = "ahmed",
+                            FirstName = "Ali",
+                            LastName = "Ahmed",
+                            Password = "12",
+                            RoleId = 2
+                        });
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.Venue", b =>

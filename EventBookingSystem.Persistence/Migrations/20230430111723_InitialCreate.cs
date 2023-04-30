@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EventBookingSystem.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -247,8 +247,8 @@ namespace EventBookingSystem.Persistence.Migrations
                 columns: new[] { "Id", "CreateDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 26, 19, 30, 24, 794, DateTimeKind.Utc).AddTicks(3645), "Test" },
-                    { 2, new DateTime(2023, 4, 26, 19, 30, 24, 794, DateTimeKind.Utc).AddTicks(3652), "Test1" }
+                    { 1, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(831), "Test" },
+                    { 2, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(845), "Test1" }
                 });
 
             migrationBuilder.InsertData(
@@ -256,8 +256,17 @@ namespace EventBookingSystem.Persistence.Migrations
                 columns: new[] { "Id", "CreateDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 26, 19, 30, 24, 794, DateTimeKind.Utc).AddTicks(3683), "Admin" },
-                    { 2, new DateTime(2023, 4, 26, 19, 30, 24, 794, DateTimeKind.Utc).AddTicks(3685), "User" }
+                    { 1, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(906), "Admin" },
+                    { 2, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(911), "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "CreateDate", "Email", "FirstName", "LastName", "Password", "RoleId" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(957), "alakbarli", "Nigar", "Alakbarli", "123", 1 },
+                    { 2, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(963), "ahmed", "Ali", "Ahmed", "12", 2 }
                 });
 
             migrationBuilder.CreateIndex(

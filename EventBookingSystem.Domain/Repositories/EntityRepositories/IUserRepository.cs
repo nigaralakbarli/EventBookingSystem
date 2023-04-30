@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EventBookingSystem.Domain.Repositories.EntityRepositories
 {
-    public interface ICategoryRepository : IBaseRepository<Category>
+    public interface IUserRepository : IBaseRepository<User>
     {
 
     }

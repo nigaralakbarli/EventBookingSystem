@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Persistence.Repositories.EntityRepositories
+namespace EventBookingSystem.Application.DTOs.Event.Request
 {
-    public class CarRepository
+    internal class EventCreateDTO
     {
-
     }
 }

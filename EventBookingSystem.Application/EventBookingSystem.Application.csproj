@@ -7,10 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="DTOs\" />
+    <Folder Include="DTOs\Authentication\Response\" />
+    <Folder Include="DTOs\Category\" />
+    <Folder Include="DTOs\User\Request\" />
+    <Folder Include="DTOs\User\Response\" />
     <Folder Include="AutoMapper\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.30.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventBookingSystem.Domain\EventBookingSystem.Domain.csproj" />
   </ItemGroup>
 
 </Project>
