@@ -17,6 +17,8 @@ namespace EventBookingSystem.WebApi.Controllers
             _authService = authService;
         }
 
+
+        [Route("/Login")]
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Login([FromQuery] LoginDTO userLogin)
@@ -30,6 +32,15 @@ namespace EventBookingSystem.WebApi.Controllers
             }
 
             return NotFound("User not found");
+        }
+
+        [Route("/Registration")]
+        [HttpPost]
+
+        public IActionResult Registration(RegistrationDTO registrationDTO) 
+        {
+            var message = _authService.Registration(registrationDTO);
+            return Ok(message);
         }
     }
 }

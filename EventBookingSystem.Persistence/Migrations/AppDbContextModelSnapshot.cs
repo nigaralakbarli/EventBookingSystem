@@ -18,6 +18,9 @@ namespace EventBookingSystem.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -45,13 +48,13 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(831),
+                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1777),
                             Name = "Test"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(845),
+                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1784),
                             Name = "Test1"
                         });
                 });
@@ -247,13 +250,13 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(906),
+                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1818),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(911),
+                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1821),
                             Name = "User"
                         });
                 });
@@ -318,7 +321,7 @@ namespace EventBookingSystem.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("RoleId")
+                    b.Property<int?>("RoleId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -331,17 +334,17 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(957),
-                            Email = "alakbarli",
+                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1844),
+                            Email = "1",
                             FirstName = "Nigar",
                             LastName = "Alakbarli",
-                            Password = "123",
+                            Password = "1",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(963),
+                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1850),
                             Email = "ahmed",
                             FirstName = "Ali",
                             LastName = "Ahmed",
@@ -466,9 +469,7 @@ namespace EventBookingSystem.Persistence.Migrations
                 {
                     b.HasOne("EventBookingSystem.Domain.Entities.Role", "Role")
                         .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
                 });

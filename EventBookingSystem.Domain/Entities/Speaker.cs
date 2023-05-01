@@ -11,6 +11,6 @@ namespace EventBookingSystem.Domain.Entities
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
-        public Event Event { get; set; }    
+        public virtual Event Event { get; set; }    
     }
 }

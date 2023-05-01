@@ -6,7 +6,6 @@ using EventBookingSystem.Domain.Repositories.EntityRepositories;
 using EventBookingSystem.Persistence.Repositories;
 using EventBookingSystem.Persistence.Repositories.EntityRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -55,9 +54,15 @@ builder.Services.AddSwaggerGen(swagger =>
 });
 
 
-//builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-//builder.Services.AddScoped(IUserRepository, UserRepository);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+
+
 
 
 //current 

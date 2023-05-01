@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventBookingSystem.Application.DTOs.Event.Response
 {
-    internal class EventResponseDTO
+    public class EventResponseDTO
     {
     }
 }

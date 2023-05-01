@@ -22,11 +22,11 @@ namespace EventBookingSystem.Domain.Entities
 
         #region Navigation Properties
 
-        public Venue Venue { get; set; }
-        public Category Category { get; set; }
-        public ICollection<Participant> Participants { get; set; }
-        public ICollection<EventEvaluation> EventEvaluations { get; set; }
-        public ICollection<Speaker> Speakers { get; set; }
+        public virtual Venue Venue { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ICollection<Participant> Participants { get; set; }
+        public virtual ICollection<EventEvaluation> EventEvaluations { get; set; }
+        public virtual ICollection<Speaker> Speakers { get; set; }
 
         #endregion
 

@@ -18,8 +18,8 @@ namespace EventBookingSystem.Persistence.Context.SeedData
                     Id = 1,
                     FirstName = "Nigar",
                     LastName = "Alakbarli",
-                    Email = "alakbarli",
-                    Password = "123",
+                    Email = "1",
+                    Password = "1",
                     RoleId = 1
                 },
 

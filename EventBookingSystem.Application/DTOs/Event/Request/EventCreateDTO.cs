@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventBookingSystem.Application.DTOs.Event.Request
 {
-    internal class EventCreateDTO
+    public class EventCreateDTO
     {
     }
 }

@@ -11,7 +11,7 @@ namespace EventBookingSystem.Domain.Entities
         public int Section { get; set; }
         public int Row { get; set; }
         public int SeatNumber { get; set; }
-        public Venue? Venue { get; set; }
-        public Participant? Participant { get; set; }    
+        public virtual Venue? Venue { get; set; }
+        public virtual Participant? Participant { get; set; }    
     }
 }

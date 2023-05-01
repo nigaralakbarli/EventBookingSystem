@@ -13,9 +13,9 @@ namespace EventBookingSystem.Domain.Entities
         public int ParticipantId { get; set; }
 
 
-        public RatingValue RatingValue { get; set; }
-        public Participant Participant { get; set; }
-        public Event Event { get; set; }
+        public virtual RatingValue RatingValue { get; set; }
+        public virtual Participant Participant { get; set; }
+        public virtual Event Event { get; set; }
 
     }
 }

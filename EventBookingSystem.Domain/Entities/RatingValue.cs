@@ -11,6 +11,6 @@ namespace EventBookingSystem.Domain.Entities
     {
         public int Value { get; set; }
 
-        public ICollection<EventEvaluation> EventEvaluations { get; set; }
+        public virtual ICollection<EventEvaluation> EventEvaluations { get; set; }
     }
 }

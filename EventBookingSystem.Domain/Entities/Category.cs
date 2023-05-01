@@ -9,6 +9,6 @@ namespace EventBookingSystem.Domain.Entities
     public class Category : BaseEntity
     {
         public string Name { get; set; }
-        public ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

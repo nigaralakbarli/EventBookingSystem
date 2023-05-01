@@ -20,6 +20,11 @@ namespace EventBookingSystem.Persistence.Repositories
             _dbContext = dbContext;
         }
 
+        public BaseRepository()
+        {
+            _dbContext = new AppDbContext();
+        }
+
         public void Add(TEntity entity)
         {
             _dbContext.Set<TEntity>().Add(entity);
@@ -37,7 +42,7 @@ namespace EventBookingSystem.Persistence.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>().OrderBy(c => c.Id);
+            return _dbContext.Set<TEntity>().OrderBy(c => c.Id).ToList();
         }
 
         public TEntity GetById(int id)

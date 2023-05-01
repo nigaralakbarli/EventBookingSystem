@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EventBookingSystem.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,7 +80,7 @@ namespace EventBookingSystem.Persistence.Migrations
                     LastName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<int>(type: "integer", nullable: false),
+                    RoleId = table.Column<int>(type: "integer", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -90,8 +90,7 @@ namespace EventBookingSystem.Persistence.Migrations
                         name: "FK_Users_Role_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -247,8 +246,8 @@ namespace EventBookingSystem.Persistence.Migrations
                 columns: new[] { "Id", "CreateDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(831), "Test" },
-                    { 2, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(845), "Test1" }
+                    { 1, new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1777), "Test" },
+                    { 2, new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1784), "Test1" }
                 });
 
             migrationBuilder.InsertData(
@@ -256,8 +255,8 @@ namespace EventBookingSystem.Persistence.Migrations
                 columns: new[] { "Id", "CreateDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(906), "Admin" },
-                    { 2, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(911), "User" }
+                    { 1, new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1818), "Admin" },
+                    { 2, new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1821), "User" }
                 });
 
             migrationBuilder.InsertData(
@@ -265,8 +264,8 @@ namespace EventBookingSystem.Persistence.Migrations
                 columns: new[] { "Id", "CreateDate", "Email", "FirstName", "LastName", "Password", "RoleId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(957), "alakbarli", "Nigar", "Alakbarli", "123", 1 },
-                    { 2, new DateTime(2023, 4, 30, 11, 17, 22, 589, DateTimeKind.Utc).AddTicks(963), "ahmed", "Ali", "Ahmed", "12", 2 }
+                    { 1, new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1844), "1", "Nigar", "Alakbarli", "1", 1 },
+                    { 2, new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1850), "ahmed", "Ali", "Ahmed", "12", 2 }
                 });
 
             migrationBuilder.CreateIndex(

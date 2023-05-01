@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Application.Services
+namespace EventBookingSystem.Application.Interfaces
 {
-    public class EventService
+    public interface ICategoryService
     {
 
     }

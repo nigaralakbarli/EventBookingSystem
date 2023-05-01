@@ -9,12 +9,11 @@
   <ItemGroup>
     <Folder Include="DTOs\Authentication\Response\" />
     <Folder Include="DTOs\Category\" />
-    <Folder Include="DTOs\User\Request\" />
-    <Folder Include="DTOs\User\Response\" />
-    <Folder Include="AutoMapper\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.30.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.0" />
@@ -22,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EventBookingSystem.Domain\EventBookingSystem.Domain.csproj" />
+    <ProjectReference Include="..\EventBookingSystem.Persistence\EventBookingSystem.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
