@@ -52,6 +52,7 @@ namespace EventBookingSystem.Application.Services
 
             var claims = new[]
             {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role.Name )
             };
@@ -63,6 +64,17 @@ namespace EventBookingSystem.Application.Services
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public string Login(LoginDTO login)
+        {
+            var user = Authenticate(login);
+            if (user != null)
+            {
+                var token = Generate(user);
+                return token;
+            }
+            return null;
         }
 
         public string Registration(RegistrationDTO registrationDTO)

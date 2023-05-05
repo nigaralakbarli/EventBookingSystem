@@ -24,8 +24,6 @@ namespace EventBookingSystem.Persistence.Context
             
             optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=EventBookingSystem;Username=postgres;Password=nigaR123");
             optionsBuilder.UseLazyLoadingProxies();
-
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

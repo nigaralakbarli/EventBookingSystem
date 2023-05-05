@@ -48,13 +48,13 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1777),
+                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3067),
                             Name = "Test"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1784),
+                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3073),
                             Name = "Test1"
                         });
                 });
@@ -116,12 +116,12 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Eventİd")
+                        .HasColumnType("integer");
+
                     b.Property<string>("ExtraComment")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("ParticipantId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("RatingValueId")
                         .HasColumnType("integer");
@@ -129,9 +129,6 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
-
-                    b.HasIndex("ParticipantId")
-                        .IsUnique();
 
                     b.HasIndex("RatingValueId");
 
@@ -149,21 +146,21 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("Row")
                         .HasColumnType("integer");
 
                     b.Property<int>("SeatNumber")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Section")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("VenueId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("VenueId");
+                    b.HasIndex("EventId");
 
                     b.ToTable("EventSeat");
                 });
@@ -250,13 +247,13 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1818),
+                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3102),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1821),
+                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3103),
                             Name = "User"
                         });
                 });
@@ -281,6 +278,9 @@ namespace EventBookingSystem.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("EventId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Eventİd")
                         .HasColumnType("integer");
 
                     b.Property<string>("FullName")
@@ -334,7 +334,7 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1844),
+                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3134),
                             Email = "1",
                             FirstName = "Nigar",
                             LastName = "Alakbarli",
@@ -344,7 +344,7 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 5, 1, 8, 10, 59, 240, DateTimeKind.Utc).AddTicks(1850),
+                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3139),
                             Email = "ahmed",
                             FirstName = "Ali",
                             LastName = "Ahmed",
@@ -366,6 +366,13 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("RowCapacity")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -399,12 +406,6 @@ namespace EventBookingSystem.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EventBookingSystem.Domain.Entities.Participant", "Participant")
-                        .WithOne("EventEvaluation")
-                        .HasForeignKey("EventBookingSystem.Domain.Entities.EventEvaluation", "ParticipantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EventBookingSystem.Domain.Entities.RatingValue", "RatingValue")
                         .WithMany("EventEvaluations")
                         .HasForeignKey("RatingValueId")
@@ -413,18 +414,18 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     b.Navigation("Event");
 
-                    b.Navigation("Participant");
-
                     b.Navigation("RatingValue");
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.EventSeat", b =>
                 {
-                    b.HasOne("EventBookingSystem.Domain.Entities.Venue", "Venue")
+                    b.HasOne("EventBookingSystem.Domain.Entities.Event", "Event")
                         .WithMany("EventSeats")
-                        .HasForeignKey("VenueId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Venue");
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.Participant", b =>
@@ -483,6 +484,8 @@ namespace EventBookingSystem.Persistence.Migrations
                 {
                     b.Navigation("EventEvaluations");
 
+                    b.Navigation("EventSeats");
+
                     b.Navigation("Participants");
 
                     b.Navigation("Speakers");
@@ -491,12 +494,6 @@ namespace EventBookingSystem.Persistence.Migrations
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.EventSeat", b =>
                 {
                     b.Navigation("Participant");
-                });
-
-            modelBuilder.Entity("EventBookingSystem.Domain.Entities.Participant", b =>
-                {
-                    b.Navigation("EventEvaluation")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.RatingValue", b =>
@@ -516,8 +513,6 @@ namespace EventBookingSystem.Persistence.Migrations
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.Venue", b =>
                 {
-                    b.Navigation("EventSeats");
-
                     b.Navigation("Events");
                 });
 #pragma warning restore 612, 618

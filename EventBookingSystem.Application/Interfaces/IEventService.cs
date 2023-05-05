@@ -13,7 +13,8 @@ namespace EventBookingSystem.Application.Interfaces
     {
         List<EventResponseDTO> GetAll();
         EventResponseDTO GetById(int id);
-        void AddEvent(EventCreateDTO eventCreate);
-        void RemoveEvent(int id);
+        void CreateEvent(EventCreateDTO eventCreate);
+        bool UpdateEvent(EventUpdateDTO eventUpdate);
+        bool DeleteEvent(int eventId);
     }
 }

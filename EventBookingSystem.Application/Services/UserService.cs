@@ -38,9 +38,9 @@ namespace EventBookingSystem.Application.Services
             return _mapper.Map<UserResponseDTO>(user);
         }
 
-        public bool UpdateUser(int userId, UserUpdateDTO userUpdateDTO)
+        public bool UpdateUser(UserUpdateDTO userUpdateDTO)
         {
-            var user = _userRepository.GetById(userId);
+            var user = _userRepository.GetById(userUpdateDTO.Id);
             if(user != null)
             {
                 var mapped = _mapper.Map<User>(userUpdateDTO);
@@ -48,7 +48,6 @@ namespace EventBookingSystem.Application.Services
                 return true;
             }
             return false;
-            
         }
 
         public bool DeleteUser(int userId)

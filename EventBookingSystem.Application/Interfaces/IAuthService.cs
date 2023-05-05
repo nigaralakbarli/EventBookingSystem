@@ -13,5 +13,6 @@ namespace EventBookingSystem.Application.Interfaces
         string Generate(User user);
         User Authenticate(LoginDTO login);
         string Registration(RegistrationDTO registrationDTO);
+        string Login(LoginDTO login);
     }
 }

@@ -23,14 +23,11 @@ namespace EventBookingSystem.WebApi.Controllers
         [HttpPost]
         public IActionResult Login([FromQuery] LoginDTO userLogin)
         {
-            var user = _authService.Authenticate(userLogin);
-
-            if (user != null)
+            var token = _authService.Login(userLogin);
+            if(token != null)
             {
-                var token = _authService.Generate(user);
                 return Ok(token);
             }
-
             return NotFound("User not found");
         }
 

@@ -14,7 +14,7 @@ namespace EventBookingSystem.Application.Interfaces
         List<UserResponseDTO> GetUsers();
         UserResponseDTO GetUserById(int id);
         void CreateUser(UserCreateDTO userCreateDTO);
-        bool UpdateUser(int userId, UserUpdateDTO userUpdateDTO);
+        bool UpdateUser(UserUpdateDTO userUpdateDto);
         bool DeleteUser(int userId);
     }
 }

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EventBookingSystem.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("UserController")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace EventBookingSystem.WebApi.Controllers
         }
 
         //[Authorize(Roles = "Admin")]
-        [Route("/GetAll")]
+        [Route("GetAll")]
         [HttpGet]
         public IActionResult GetUsers()
         {
@@ -29,7 +29,7 @@ namespace EventBookingSystem.WebApi.Controllers
         }
 
         //[Authorize(Roles = "Admin")]
-        [Route("/GetById")]
+        [Route("GetById")]
         [HttpGet]
         public IActionResult GetUserById(int id)
         {
@@ -39,7 +39,7 @@ namespace EventBookingSystem.WebApi.Controllers
         }
 
         //[Authorize(Roles = "Admin")]
-        [Route("/Create")]
+        [Route("Create")]
         [HttpPost]
         public IActionResult Create(UserCreateDTO userCreateDTO)
         {
@@ -48,20 +48,20 @@ namespace EventBookingSystem.WebApi.Controllers
         }
 
         //[Authorize(Roles = "Admin")]
-        [Route("/Update")]
+        [Route("Update")]
         [HttpPost]
-        public IActionResult Update(int userId,UserUpdateDTO userUpdateDTO)
+        public IActionResult Update(UserUpdateDTO userUpdateDTO)
         {
 
-            if (!_userService.UpdateUser(userId, userUpdateDTO))
+            if (!_userService.UpdateUser(userUpdateDTO))
             {
-                return BadRequest($"User with ID {userId} not found.");
+                return BadRequest($"User with ID {userUpdateDTO.Id} not found.");
             }
             return Ok();
         }
 
         //[Authorize(Roles = "Admin")]
-        [Route("/Delete")]
+        [Route("Delete")]
         [HttpDelete]
         public IActionResult DeleteUser(int userId)
         {

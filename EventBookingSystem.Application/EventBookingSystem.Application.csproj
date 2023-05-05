@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="DTOs\Authentication\Response\" />
-    <Folder Include="DTOs\Category\" />
+    <Folder Include="DTOs\EventSeat\Request\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Domain.Entities
+namespace EventBookingSystem.Application.DTOs.Venue.Response
 {
-    public class Venue : BaseEntity
+    public class VenueResponseDTO
     {
         public string Name { get; set; }
         public int Capacity { get; set; }
-        public int RowCapacity { get; set; }
-        public virtual ICollection<Event> Events{ get; set; }
     }
 }

@@ -10,12 +10,10 @@ namespace EventBookingSystem.Domain.Entities
     {
         public string ExtraComment { get; set; }
         public int RatingValueId { get; set; }
-        public int ParticipantId { get; set; }
+        public int Eventİd { get; set; }
 
 
         public virtual RatingValue RatingValue { get; set; }
-        public virtual Participant Participant { get; set; }
         public virtual Event Event { get; set; }
-
     }
 }
