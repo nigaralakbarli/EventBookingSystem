@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Application.Interfaces
+namespace EventBookingSystem.Application.Interfaces;
+
+public interface IEventSeatService
 {
-    public interface IEventSeatService
-    {
-        List<EventSeatResponseDTO> GetSeatsByEventId(int eventId);
-        bool BookSeat(int seatId);
-        bool CancleBooking(int seatId);
-    }
+    List<EventSeatResponseDTO> GetSeatsByEventId(int eventId);
+    bool BookSeat(int seatId);
+    bool CancleBooking(int seatId);
 }

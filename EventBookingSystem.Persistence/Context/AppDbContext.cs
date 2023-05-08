@@ -10,28 +10,28 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Persistence.Context
+namespace EventBookingSystem.Persistence.Context;
+
+public class AppDbContext : DbContext
 {
-    public class AppDbContext : DbContext
+    //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    //{
+
+    //}
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        //{
-
-        //}
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            
-            optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=EventBookingSystem;Username=postgres;Password=nigaR123");
-            optionsBuilder.UseLazyLoadingProxies();
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Seeder();
-        }
-        public DbSet<User> Users { get; set; }
-
+        
+        optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=EventBookingSystem;Username=postgres;Password=nigaR123");
+        optionsBuilder.UseLazyLoadingProxies();
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<SpeakerEvent>().HasKey(src => new { src.SpeakerId, src.EventId });
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Seeder();
+    }
+    public DbSet<User> Users { get; set; }
+
 }

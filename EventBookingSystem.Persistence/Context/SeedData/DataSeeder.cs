@@ -16,6 +16,7 @@ namespace EventBookingSystem.Persistence.Context.SeedData
             modelBuilder.Entity<Category>().HasData(SeedCategory());
             modelBuilder.Entity<Role>().HasData(SeedRole());
             modelBuilder.Entity<User>().HasData(SeedUser());
+            modelBuilder.Entity<Venue>().HasData(SeedVenue());
             
         }
     }

@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Persistence.Repositories.EntityRepositories
-{
-    public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
-    {
+namespace EventBookingSystem.Persistence.Repositories.EntityRepositories;
 
-    }
+public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
+{
+
 }

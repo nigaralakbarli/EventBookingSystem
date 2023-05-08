@@ -11,7 +11,7 @@ namespace EventBookingSystem.Persistence.Context.SeedData
     {
         public static List<User> SeedUser()
         {
-            List<User> users = new List<User>()
+            var users = new List<User>()
             {
                  new User()
                 {

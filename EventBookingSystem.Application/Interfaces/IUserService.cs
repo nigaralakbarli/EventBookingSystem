@@ -7,14 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Application.Interfaces
+namespace EventBookingSystem.Application.Interfaces;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        List<UserResponseDTO> GetUsers();
-        UserResponseDTO GetUserById(int id);
-        void CreateUser(UserCreateDTO userCreateDTO);
-        bool UpdateUser(UserUpdateDTO userUpdateDto);
-        bool DeleteUser(int userId);
-    }
+    List<UserResponseDTO> GetUsers();
+    UserResponseDTO GetUserById(int id);
+    void CreateUser(UserCreateDTO userCreateDTO);
+    bool UpdateUser(UserUpdateDTO userUpdateDto);
+    bool DeleteUser(int userId);
 }

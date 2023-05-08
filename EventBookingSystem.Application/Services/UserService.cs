@@ -13,58 +13,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Application.Services
+namespace EventBookingSystem.Application.Services;
+
+public class UserService : IUserService
 {
-    public class UserService : IUserService
+    private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
+    public UserService(IUserRepository userRepository, IMapper mapper)
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IMapper _mapper;
-        public UserService(IUserRepository userRepository, IMapper mapper)
-        {
-            _userRepository = userRepository;
-            _mapper = mapper;
-        }
+        _userRepository = userRepository;
+        _mapper = mapper;
+    }
 
-        public List<UserResponseDTO> GetUsers()
-        {
-            var users = _userRepository.GetAll().ToList();
-            return _mapper.Map<List<UserResponseDTO>>(users);
-            
-        }
+    public List<UserResponseDTO> GetUsers()
+    {
+        var users = _userRepository.GetAll().ToList();
+        return _mapper.Map<List<UserResponseDTO>>(users);
+        
+    }
 
-        public UserResponseDTO GetUserById(int id)
-        {
-            var user = _userRepository.GetById(id);
-            return _mapper.Map<UserResponseDTO>(user);
-        }
+    public UserResponseDTO GetUserById(int id)
+    {
+        var user = _userRepository.GetById(id);
+        return _mapper.Map<UserResponseDTO>(user);
+    }
 
-        public bool UpdateUser(UserUpdateDTO userUpdateDTO)
+    public bool UpdateUser(UserUpdateDTO userUpdateDTO)
+    {
+        var user = _userRepository.GetById(userUpdateDTO.Id);
+        if(user != null)
         {
-            var user = _userRepository.GetById(userUpdateDTO.Id);
-            if(user != null)
-            {
-                var mapped = _mapper.Map<User>(userUpdateDTO);
-                _userRepository.Update(mapped);
-                return true;
-            }
-            return false;
+            var mapped = _mapper.Map<User>(userUpdateDTO);
+            _userRepository.Update(mapped);
+            return true;
         }
+        return false;
+    }
 
-        public bool DeleteUser(int userId)
+    public bool DeleteUser(int userId)
+    {
+        var user = _userRepository.GetById(userId);
+        if (user!=null)
         {
-            var user = _userRepository.GetById(userId);
-            if (user!=null)
-            {
-                _userRepository.Remove(user);
-                return true;
-            }
-            return false;
+            _userRepository.Remove(user);
+            return true;
         }
+        return false;
+    }
 
-        public void CreateUser(UserCreateDTO userCreateDTO)
-        {
-            var user = _mapper.Map<User>(userCreateDTO);
-            _userRepository.Add(user);
-        }
+    public void CreateUser(UserCreateDTO userCreateDTO)
+    {
+        var user = _mapper.Map<User>(userCreateDTO);
+        _userRepository.Add(user);
     }
 }

@@ -33,9 +33,6 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -48,13 +45,11 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3067),
                             Name = "Test"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3073),
                             Name = "Test1"
                         });
                 });
@@ -69,9 +64,6 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
@@ -110,9 +102,6 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<int>("EventId")
                         .HasColumnType("integer");
 
@@ -143,14 +132,14 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<int>("EventId")
                         .HasColumnType("integer");
 
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("boolean");
+
+                    b.Property<int?>("ParticipantId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Row")
                         .HasColumnType("integer");
@@ -161,6 +150,9 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
+
+                    b.HasIndex("ParticipantId")
+                        .IsUnique();
 
                     b.ToTable("EventSeat");
                 });
@@ -173,17 +165,11 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("EventId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EventSeatId")
                         .HasColumnType("integer");
 
                     b.Property<string>("FullName")
@@ -197,9 +183,6 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.HasIndex("EventSeatId")
-                        .IsUnique();
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Participant");
@@ -212,9 +195,6 @@ namespace EventBookingSystem.Persistence.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Value")
                         .HasColumnType("integer");
@@ -232,9 +212,6 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -247,13 +224,11 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3102),
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3103),
                             Name = "User"
                         });
                 });
@@ -266,9 +241,6 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
@@ -277,21 +249,31 @@ namespace EventBookingSystem.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("EventId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Eventİd")
-                        .HasColumnType("integer");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
+                    b.ToTable("Speaker");
+                });
+
+            modelBuilder.Entity("EventBookingSystem.Domain.Entities.SpeakerEvent", b =>
+                {
+                    b.Property<int>("SpeakerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("SpeakerId", "EventId");
+
                     b.HasIndex("EventId");
 
-                    b.ToTable("Speaker");
+                    b.ToTable("SpeakerEvent");
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.User", b =>
@@ -301,9 +283,6 @@ namespace EventBookingSystem.Persistence.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -334,7 +313,6 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3134),
                             Email = "1",
                             FirstName = "Nigar",
                             LastName = "Alakbarli",
@@ -344,7 +322,6 @@ namespace EventBookingSystem.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3139),
                             Email = "ahmed",
                             FirstName = "Ali",
                             LastName = "Ahmed",
@@ -364,9 +341,6 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -377,6 +351,22 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Venue");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Capacity = 50,
+                            Name = "Akt zalı",
+                            RowCapacity = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Capacity = 20,
+                            Name = "Otaq 201",
+                            RowCapacity = 5
+                        });
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.Event", b =>
@@ -425,7 +415,13 @@ namespace EventBookingSystem.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EventBookingSystem.Domain.Entities.Participant", "Participant")
+                        .WithOne("EventSeat")
+                        .HasForeignKey("EventBookingSystem.Domain.Entities.EventSeat", "ParticipantId");
+
                     b.Navigation("Event");
+
+                    b.Navigation("Participant");
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.Participant", b =>
@@ -433,12 +429,6 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.HasOne("EventBookingSystem.Domain.Entities.Event", "Event")
                         .WithMany("Participants")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EventBookingSystem.Domain.Entities.EventSeat", "EventSeat")
-                        .WithOne("Participant")
-                        .HasForeignKey("EventBookingSystem.Domain.Entities.Participant", "EventSeatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -450,20 +440,26 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     b.Navigation("Event");
 
-                    b.Navigation("EventSeat");
-
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EventBookingSystem.Domain.Entities.Speaker", b =>
+            modelBuilder.Entity("EventBookingSystem.Domain.Entities.SpeakerEvent", b =>
                 {
                     b.HasOne("EventBookingSystem.Domain.Entities.Event", "Event")
-                        .WithMany("Speakers")
+                        .WithMany("SpeakerEvents")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EventBookingSystem.Domain.Entities.Speaker", "Speaker")
+                        .WithMany("SpeakerEvents")
+                        .HasForeignKey("SpeakerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Event");
+
+                    b.Navigation("Speaker");
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.User", b =>
@@ -488,12 +484,13 @@ namespace EventBookingSystem.Persistence.Migrations
 
                     b.Navigation("Participants");
 
-                    b.Navigation("Speakers");
+                    b.Navigation("SpeakerEvents");
                 });
 
-            modelBuilder.Entity("EventBookingSystem.Domain.Entities.EventSeat", b =>
+            modelBuilder.Entity("EventBookingSystem.Domain.Entities.Participant", b =>
                 {
-                    b.Navigation("Participant");
+                    b.Navigation("EventSeat")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.RatingValue", b =>
@@ -504,6 +501,11 @@ namespace EventBookingSystem.Persistence.Migrations
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("EventBookingSystem.Domain.Entities.Speaker", b =>
+                {
+                    b.Navigation("SpeakerEvents");
                 });
 
             modelBuilder.Entity("EventBookingSystem.Domain.Entities.User", b =>

@@ -11,7 +11,7 @@ namespace EventBookingSystem.Persistence.Context.SeedData
     {
         public static List<Role> SeedRole()
         {
-            List<Role> roles = new List<Role>()
+            var roles = new List<Role>()
             {
                  new Role()
                 {

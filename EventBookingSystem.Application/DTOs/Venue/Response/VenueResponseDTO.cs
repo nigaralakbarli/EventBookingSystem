@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Application.DTOs.Venue.Response
+namespace EventBookingSystem.Application.DTOs.Venue.Response;
+
+public class VenueResponseDTO
 {
-    public class VenueResponseDTO
-    {
-        public string Name { get; set; }
-        public int Capacity { get; set; }
-    }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Capacity { get; set; }
 }

@@ -12,7 +12,7 @@ namespace EventBookingSystem.Persistence.Context.SeedData
     {
         public static List<Category> SeedCategory()
         {
-            List<Category> categories = new List<Category>()
+            var categories = new List<Category>()
             {
                  new Category()
                 {

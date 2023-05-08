@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Persistence.Repositories.EntityRepositories
+namespace EventBookingSystem.Persistence.Repositories.EntityRepositories;
+
+public class UserRepository : BaseRepository<User>, IUserRepository
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
-    {
-        
-    }
+    
 }

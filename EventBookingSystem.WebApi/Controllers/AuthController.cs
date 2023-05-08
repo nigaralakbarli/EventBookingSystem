@@ -4,40 +4,39 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EventBookingSystem.WebApi.Controllers
+namespace EventBookingSystem.WebApi.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class AuthController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthController : ControllerBase
+    private readonly IAuthService _authService;
+
+    public AuthController(IAuthService authService)
     {
-        private readonly IAuthService _authService;
+        _authService = authService;
+    }
 
-        public AuthController(IAuthService authService)
+
+    [Route("/Login")]
+    [AllowAnonymous]
+    [HttpPost]
+    public IActionResult Login([FromQuery] LoginDTO userLogin)
+    {
+        var token = _authService.Login(userLogin);
+        if(token != null)
         {
-            _authService = authService;
+            return Ok(token);
         }
+        return NotFound("User not found");
+    }
 
+    [Route("/Registration")]
+    [HttpPost]
 
-        [Route("/Login")]
-        [AllowAnonymous]
-        [HttpPost]
-        public IActionResult Login([FromQuery] LoginDTO userLogin)
-        {
-            var token = _authService.Login(userLogin);
-            if(token != null)
-            {
-                return Ok(token);
-            }
-            return NotFound("User not found");
-        }
-
-        [Route("/Registration")]
-        [HttpPost]
-
-        public IActionResult Registration(RegistrationDTO registrationDTO) 
-        {
-            var message = _authService.Registration(registrationDTO);
-            return Ok(message);
-        }
+    public IActionResult Registration(RegistrationDTO registrationDTO) 
+    {
+        var message = _authService.Registration(registrationDTO);
+        return Ok(message);
     }
 }

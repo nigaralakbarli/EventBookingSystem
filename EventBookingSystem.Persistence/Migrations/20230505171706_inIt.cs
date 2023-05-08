@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EventBookingSystem.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class inIt : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,8 +20,7 @@ namespace EventBookingSystem.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,8 +33,7 @@ namespace EventBookingSystem.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Value = table.Column<int>(type: "integer", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Value = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,12 +46,26 @@ namespace EventBookingSystem.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Speaker",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FullName = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Speaker", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,8 +76,7 @@ namespace EventBookingSystem.Persistence.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Capacity = table.Column<int>(type: "integer", nullable: false),
-                    RowCapacity = table.Column<int>(type: "integer", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    RowCapacity = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,8 +93,7 @@ namespace EventBookingSystem.Persistence.Migrations
                     LastName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<int>(type: "integer", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    RoleId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,8 +117,7 @@ namespace EventBookingSystem.Persistence.Migrations
                     StartTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     EndTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     VenueId = table.Column<int>(type: "integer", nullable: false),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CategoryId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -136,8 +145,7 @@ namespace EventBookingSystem.Persistence.Migrations
                     ExtraComment = table.Column<string>(type: "text", nullable: false),
                     RatingValueId = table.Column<int>(type: "integer", nullable: false),
                     Eventİd = table.Column<int>(type: "integer", nullable: false),
-                    EventId = table.Column<int>(type: "integer", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    EventId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -157,53 +165,6 @@ namespace EventBookingSystem.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventSeat",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Row = table.Column<int>(type: "integer", nullable: false),
-                    SeatNumber = table.Column<int>(type: "integer", nullable: false),
-                    EventId = table.Column<int>(type: "integer", nullable: false),
-                    IsAvailable = table.Column<bool>(type: "boolean", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EventSeat", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EventSeat_Event_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Event",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Speaker",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FullName = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Eventİd = table.Column<int>(type: "integer", nullable: false),
-                    EventId = table.Column<int>(type: "integer", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Speaker", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Speaker_Event_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Event",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Participant",
                 columns: table => new
                 {
@@ -212,19 +173,11 @@ namespace EventBookingSystem.Persistence.Migrations
                     FullName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false),
-                    EventSeatId = table.Column<int>(type: "integer", nullable: false),
-                    EventId = table.Column<int>(type: "integer", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    EventId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Participant", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Participant_EventSeat_EventSeatId",
-                        column: x => x.EventSeatId,
-                        principalTable: "EventSeat",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Participant_Event_EventId",
                         column: x => x.EventId,
@@ -239,31 +192,93 @@ namespace EventBookingSystem.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SpeakerEvent",
+                columns: table => new
+                {
+                    SpeakerId = table.Column<int>(type: "integer", nullable: false),
+                    EventId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpeakerEvent", x => new { x.SpeakerId, x.EventId });
+                    table.ForeignKey(
+                        name: "FK_SpeakerEvent_Event_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Event",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SpeakerEvent_Speaker_SpeakerId",
+                        column: x => x.SpeakerId,
+                        principalTable: "Speaker",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EventSeat",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Row = table.Column<int>(type: "integer", nullable: false),
+                    SeatNumber = table.Column<int>(type: "integer", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "boolean", nullable: false),
+                    EventId = table.Column<int>(type: "integer", nullable: false),
+                    ParticipantId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EventSeat", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EventSeat_Event_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Event",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventSeat_Participant_ParticipantId",
+                        column: x => x.ParticipantId,
+                        principalTable: "Participant",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Category",
-                columns: new[] { "Id", "CreateDate", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3067), "Test" },
-                    { 2, new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3073), "Test1" }
+                    { 1, "Test" },
+                    { 2, "Test1" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Role",
-                columns: new[] { "Id", "CreateDate", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3102), "Admin" },
-                    { 2, new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3103), "User" }
+                    { 1, "Admin" },
+                    { 2, "User" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Venue",
+                columns: new[] { "Id", "Capacity", "Name", "RowCapacity" },
+                values: new object[,]
+                {
+                    { 1, 50, "Akt zalı", 10 },
+                    { 2, 20, "Otaq 201", 5 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreateDate", "Email", "FirstName", "LastName", "Password", "RoleId" },
+                columns: new[] { "Id", "Email", "FirstName", "LastName", "Password", "RoleId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3134), "1", "Nigar", "Alakbarli", "1", 1 },
-                    { 2, new DateTime(2023, 5, 5, 9, 18, 16, 449, DateTimeKind.Utc).AddTicks(3139), "ahmed", "Ali", "Ahmed", "12", 2 }
+                    { 1, "1", "Nigar", "Alakbarli", "1", 1 },
+                    { 2, "ahmed", "Ali", "Ahmed", "12", 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -292,15 +307,15 @@ namespace EventBookingSystem.Persistence.Migrations
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EventSeat_ParticipantId",
+                table: "EventSeat",
+                column: "ParticipantId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Participant_EventId",
                 table: "Participant",
                 column: "EventId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Participant_EventSeatId",
-                table: "Participant",
-                column: "EventSeatId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Participant_UserId",
@@ -308,8 +323,8 @@ namespace EventBookingSystem.Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Speaker_EventId",
-                table: "Speaker",
+                name: "IX_SpeakerEvent_EventId",
+                table: "SpeakerEvent",
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
@@ -325,31 +340,34 @@ namespace EventBookingSystem.Persistence.Migrations
                 name: "EventEvaluation");
 
             migrationBuilder.DropTable(
+                name: "EventSeat");
+
+            migrationBuilder.DropTable(
+                name: "SpeakerEvent");
+
+            migrationBuilder.DropTable(
+                name: "RatingValue");
+
+            migrationBuilder.DropTable(
                 name: "Participant");
 
             migrationBuilder.DropTable(
                 name: "Speaker");
 
             migrationBuilder.DropTable(
-                name: "RatingValue");
-
-            migrationBuilder.DropTable(
-                name: "EventSeat");
-
-            migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Event");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropTable(
                 name: "Venue");
+
+            migrationBuilder.DropTable(
+                name: "Role");
         }
     }
 }

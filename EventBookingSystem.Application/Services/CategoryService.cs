@@ -12,56 +12,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Application.Services
+namespace EventBookingSystem.Application.Services;
+
+public class CategoryService : ICategoryService
 {
-    public class CategoryService : ICategoryService
+    private readonly ICategoryRepository _categoryRepository;
+    private readonly IMapper _mapper;
+    public CategoryService(
+        ICategoryRepository categoryRepository,
+        IMapper mapper)
     {
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IMapper _mapper;
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+        _categoryRepository = categoryRepository;
+        _mapper = mapper;
+    }
+
+    public List<CategoryResponseDTO> GetCategories()
+    {
+        var categories = _categoryRepository.GetAll();
+        return _mapper.Map<List<CategoryResponseDTO>>(categories);
+    }
+    public CategoryResponseDTO GetCategoryById(int categoryId)
+    {
+        var category = _categoryRepository.GetById(categoryId);
+        return _mapper.Map<CategoryResponseDTO>(category);
+    }
+
+    public void CreateCategory(CategoryRequestDTO categoryRequestDTO)
+    {
+        var category = _mapper.Map<Category>(categoryRequestDTO);
+        _categoryRepository.Add(category);
+    }
+    public bool DeleteCategory(int categoryId)
+    {
+        var category = _categoryRepository.GetById(categoryId);
+        if(category != null)
         {
-            _categoryRepository = categoryRepository;
-            _mapper = mapper;
+            _categoryRepository.Remove(category);
+            return true;
         }
-        public void CreateCategory(CategoryRequestDTO categoryRequestDTO)
+        return false;
+    }
+    
+    public bool UpdateCategory(CategoryRequestDTO categoryRequestDTO)
+    {
+        var category = _categoryRepository.GetById(categoryRequestDTO.Id);
+        if (category != null)
         {
             var mapped = _mapper.Map<Category>(categoryRequestDTO);
-            _categoryRepository.Add(mapped);
+            _categoryRepository.Update(mapped);
+            return true;
         }
-
-        public bool DeleteCategory(int id)
-        {
-            var category = _categoryRepository.GetById(id);
-            if(category != null)
-            {
-                _categoryRepository.Remove(category);
-                return true;
-            }
-            return false;
-        }
-
-        public List<CategoryResponseDTO> GetCategories()
-        {
-            var categories = _categoryRepository.GetAll();
-            return _mapper.Map<List<CategoryResponseDTO>>(categories);    
-        }
-
-        public CategoryResponseDTO GetCategoryById(int id)
-        {
-            var category = _categoryRepository.GetById(id);
-            return _mapper.Map<CategoryResponseDTO>(category);
-        }
-
-        public bool UpdateCategory(CategoryRequestDTO categoryRequestDTO)
-        {
-            var category = _categoryRepository.GetById(categoryRequestDTO.Id);
-            if (category != null)
-            {
-                var mapped = _mapper.Map<Category>(categoryRequestDTO);
-                _categoryRepository.Update(mapped);
-                return true;
-            }
-            return false;
-        }
+        return false;
     }
 }

@@ -6,13 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EventBookingSystem.Application.Interfaces
+namespace EventBookingSystem.Application.Interfaces;
+
+public interface IAuthService
 {
-    public interface IAuthService
-    {
-        string Generate(User user);
-        User Authenticate(LoginDTO login);
-        string Registration(RegistrationDTO registrationDTO);
-        string Login(LoginDTO login);
-    }
+    string Generate(User user);
+    User Authenticate(LoginDTO login);
+    string Registration(RegistrationDTO registrationDTO);
+    string Login(LoginDTO login);
 }
