@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventBookingSystem.WebApi.Controllers;
 
-[Route("EventSeatController")]
+[Route("EventSeat")]
 [ApiController]
 public class EventSeatController : ControllerBase
 {
@@ -15,9 +15,16 @@ public class EventSeatController : ControllerBase
         _eventSeatService = eventSeatService;
     }
 
+    [Route("GetAll")]
+    [HttpGet]
+    public IActionResult GetSeats()
+    {
+        return Ok(_eventSeatService.GetSeats());
+    }
+
     [Route("GetSeatsByEventId")]
     [HttpGet]
-    public IActionResult GetSeats(int eventId) 
+    public IActionResult GetSeatsByEvent(int eventId) 
     {
         return Ok(_eventSeatService.GetSeatsByEventId(eventId));
     }

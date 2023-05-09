@@ -1,13 +1,10 @@
-﻿using EventBookingSystem.Application.DTOs.Category.Request;
-using EventBookingSystem.Application.DTOs.Venue.Request;
+﻿using EventBookingSystem.Application.DTOs.Venue.Request;
 using EventBookingSystem.Application.Interfaces;
-using EventBookingSystem.Application.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventBookingSystem.WebApi.Controllers;
 
-[Route("VenueController")]
+[Route("Venue")]
 [ApiController]
 public class VenueController : ControllerBase
 {

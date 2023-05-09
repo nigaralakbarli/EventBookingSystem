@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EventBookingSystem.WebApi.Controllers;
 
-[Route("UserController")]
+[Route("User")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -23,9 +23,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public IActionResult GetUsers()
     {
-        
-        var users = _userService.GetUsers();
-        return Ok(users);
+        return Ok(_userService.GetUsers());
     }
 
     //[Authorize(Roles = "Admin")]
@@ -33,9 +31,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public IActionResult GetUserById(int id)
     {
-
-        var user = _userService.GetUserById(id);
-        return Ok(user);
+        return Ok(_userService.GetUserById(id));
     }
 
     //[Authorize(Roles = "Admin")]

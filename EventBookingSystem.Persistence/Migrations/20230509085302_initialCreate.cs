@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EventBookingSystem.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class inIt : Migration
+    public partial class initialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -144,7 +144,6 @@ namespace EventBookingSystem.Persistence.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ExtraComment = table.Column<string>(type: "text", nullable: false),
                     RatingValueId = table.Column<int>(type: "integer", nullable: false),
-                    Eventİd = table.Column<int>(type: "integer", nullable: false),
                     EventId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

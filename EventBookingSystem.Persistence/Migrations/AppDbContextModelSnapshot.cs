@@ -105,9 +105,6 @@ namespace EventBookingSystem.Persistence.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Eventİd")
-                        .HasColumnType("integer");
-
                     b.Property<string>("ExtraComment")
                         .IsRequired()
                         .HasColumnType("text");

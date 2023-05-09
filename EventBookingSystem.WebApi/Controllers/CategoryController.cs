@@ -1,12 +1,10 @@
 ﻿using EventBookingSystem.Application.DTOs.Category.Request;
-using EventBookingSystem.Application.DTOs.User.Request;
 using EventBookingSystem.Application.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventBookingSystem.WebApi.Controllers;
 
-[Route("CategoryController")]
+[Route("Category")]
 [ApiController]
 public class CategoryController : ControllerBase
 {
@@ -22,18 +20,15 @@ public class CategoryController : ControllerBase
     [HttpGet]
     public IActionResult GetCategories()
     {
-        var categories = _categoryService.GetCategories();
-        return Ok(categories);
+        return Ok(_categoryService.GetCategories());
     }
 
     //[Authorize(Roles = "Admin")]
     [Route("GetById")]
     [HttpGet]
-    public IActionResult GetCategoryById(int id)
+    public IActionResult GetCategoryById(int categoryId)
     {
-
-        var category = _categoryService.GetCategoryById(id);
-        return Ok(category);
+        return Ok(_categoryService.GetCategoryById(categoryId));
     }
 
     //[Authorize(Roles = "Admin")]

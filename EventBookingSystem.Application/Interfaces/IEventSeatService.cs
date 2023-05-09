@@ -9,6 +9,7 @@ namespace EventBookingSystem.Application.Interfaces;
 
 public interface IEventSeatService
 {
+    List<EventSeatResponseDTO> GetSeats();
     List<EventSeatResponseDTO> GetSeatsByEventId(int eventId);
     bool BookSeat(int seatId);
     bool CancleBooking(int seatId);

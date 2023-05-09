@@ -35,6 +35,10 @@ public class EventSeatService : IEventSeatService
         _mapper = mapper;
     }
 
+    public List<EventSeatResponseDTO> GetSeats()
+    {
+        return _mapper.Map<List<EventSeatResponseDTO>>(_eventSeatRepository.GetAll());
+    }
     public List<EventSeatResponseDTO> GetSeatsByEventId(int eventId)
     {
         var seats = _eventSeatRepository.Find(s=> s.EventId == eventId).OrderBy(s=> s.Id);
@@ -85,4 +89,5 @@ public class EventSeatService : IEventSeatService
         var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         return _userRepository.GetById(Convert.ToInt32(userId));
     }
+
 }

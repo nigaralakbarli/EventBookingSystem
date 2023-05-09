@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventBookingSystem.WebApi.Controllers;
 
-[Route("EventController")]
+[Route("Event")]
 [ApiController]
 public class EventController : ControllerBase
 {

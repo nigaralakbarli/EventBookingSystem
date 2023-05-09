@@ -8,5 +8,6 @@ namespace EventBookingSystem.Application.DTOs.RatingValue.Response;
 
 public class RatingValueResponseDTO
 {
-
+    public int Id { get; set; }
+    public int Value { get; set; }
 }
