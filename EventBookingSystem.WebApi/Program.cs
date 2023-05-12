@@ -1,3 +1,4 @@
+using EventBookingSystem.Application.Helper.ExcelFile;
 using EventBookingSystem.Application.Interfaces;
 using EventBookingSystem.Application.Services;
 using EventBookingSystem.Domain.Entities;
@@ -58,11 +59,21 @@ builder.Services.AddSwaggerGen(swagger =>
 //Services
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IVenueService, VenueService>();
+builder.Services.AddScoped<IEventEvaluationService, EventEvaluationService>();
 builder.Services.AddScoped<IEventSeatService, EventSeatService>();
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IParticipantService, ParticipantService>();
+builder.Services.AddScoped<IRatingValueService, RatingValueService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<ISpeakerEventService, SpeakerEventService>();
+builder.Services.AddScoped<ISpeakerService, SpeakerService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IVenueService, VenueService>();
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IExcelFile, ExcelFile>();
+
+
 
 
 
@@ -77,6 +88,7 @@ builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<ISpeakerRepository, SpeakerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IVenueRepository, VenueRepository>();
+builder.Services.AddScoped<ISpeakerEventRepository, SpeakerEventRepository>();
 
 
 

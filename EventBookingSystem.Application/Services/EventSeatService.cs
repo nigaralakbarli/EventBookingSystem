@@ -75,6 +75,13 @@ public class EventSeatService : IEventSeatService
             seat.ParticipantId = null;
             seat.IsAvailable = true;
             _eventSeatRepository.Update(seat);
+
+            if (seat.ParticipantId != null)
+            {
+                var participant = _participantRepository.GetById((int)seat.ParticipantId);
+                _participantRepository.Remove(participant);
+            }
+
             return true;
         }
         return false;

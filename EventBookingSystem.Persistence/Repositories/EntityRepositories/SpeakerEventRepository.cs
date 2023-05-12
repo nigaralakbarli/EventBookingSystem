@@ -10,5 +10,6 @@ namespace EventBookingSystem.Persistence.Repositories.EntityRepositories
 {
     public class SpeakerEventRepository : BaseRepository<SpeakerEvent> , ISpeakerEventRepository
     {
+
     }
 }

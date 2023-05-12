@@ -21,4 +21,8 @@
     <ProjectReference Include="..\EventBookingSystem.Persistence\EventBookingSystem.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\Files\" />
+  </ItemGroup>
+
 </Project>

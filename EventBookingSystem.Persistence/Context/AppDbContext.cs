@@ -1,14 +1,6 @@
-﻿using Azure.Core;
-using EventBookingSystem.Domain.Entities;
+﻿using EventBookingSystem.Domain.Entities;
 using EventBookingSystem.Persistence.Context.SeedData;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EventBookingSystem.Persistence.Context;
 
@@ -21,8 +13,8 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        
-        optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=EventBookingSystem;Username=postgres;Password=nigaR123");
+        optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-3QONI5I\SQLEXPRESS;Initial Catalog=EventBookingSystemDb;Integrated Security=True;TrustServerCertificate=True;");
+        //optionsBuilder.UseNpgsql("Server=localhost;Port=5432;Database=EventBookingSystem;Username=postgres;Password=nigaR123");
         optionsBuilder.UseLazyLoadingProxies();
     }
 
