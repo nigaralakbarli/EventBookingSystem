@@ -45,7 +45,7 @@ public class RoleController : ControllerBase
 
     //[Authorize(Roles = "Admin")]
     [Route("Update")]
-    [HttpPost]
+    [HttpPut]
     public IActionResult UpdateRole(RoleRequestDTO roleRequestDTO)
     {
         if (_roleService.UpdateRole(roleRequestDTO))

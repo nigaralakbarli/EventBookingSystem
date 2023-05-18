@@ -1,5 +1,6 @@
 ﻿using EventBookingSystem.Application.DTOs.Category.Request;
 using EventBookingSystem.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventBookingSystem.WebApi.Controllers;
@@ -15,7 +16,8 @@ public class CategoryController : ControllerBase
     }
 
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("GetAll")]
     [HttpGet]
     public IActionResult GetCategories()
@@ -23,7 +25,9 @@ public class CategoryController : ControllerBase
         return Ok(_categoryService.GetCategories());
     }
 
-    //[Authorize(Roles = "Admin")]
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("GetById")]
     [HttpGet]
     public IActionResult GetCategoryById(int categoryId)
@@ -31,7 +35,9 @@ public class CategoryController : ControllerBase
         return Ok(_categoryService.GetCategoryById(categoryId));
     }
 
-    //[Authorize(Roles = "Admin")]
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("Create")]
     [HttpPost]
     public IActionResult CreateCategory(CategoryRequestDTO categoryRequestDTO)
@@ -40,9 +46,11 @@ public class CategoryController : ControllerBase
         return Ok("Successfully created");
     }
 
-    //[Authorize(Roles = "Admin")]
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("Update")]
-    [HttpPost]
+    [HttpPut]
     public IActionResult UpdateCategory(CategoryRequestDTO categoryRequestDTO)
     {
         if (_categoryService.UpdateCategory(categoryRequestDTO))
@@ -52,7 +60,9 @@ public class CategoryController : ControllerBase
         return BadRequest($"Category with ID {categoryRequestDTO.Id} not found.");
     }
 
-    //[Authorize(Roles = "Admin")]
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("Delete")]
     [HttpDelete]
     public IActionResult DeleteCategory(int categoryId)

@@ -45,7 +45,7 @@ public class RatingValueController : ControllerBase
 
     //[Authorize(Roles = "Admin")]
     [Route("Update")]   
-    [HttpPost]
+    [HttpPut]
     public IActionResult UpdateRatingValue(RatingValueRequestDTO ratingValueRequestDTO)
     {
         if (_ratingValueService.UpdateRatingValue(ratingValueRequestDTO))

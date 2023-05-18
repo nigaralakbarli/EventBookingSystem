@@ -12,4 +12,5 @@ public interface IRoleService
     bool UpdateRole(RoleRequestDTO roleRequestDTO);
     bool DeleteRole(int roleId);
 
+        
 }

@@ -1,4 +1,5 @@
-﻿using EventBookingSystem.Application.DTOs.User.Request;
+﻿using EventBookingSystem.Application.DTOs.Role.Request;
+using EventBookingSystem.Application.DTOs.User.Request;
 using EventBookingSystem.Application.DTOs.User.Response;
 using EventBookingSystem.Domain.Entities;
 using System;
@@ -16,4 +17,5 @@ public interface IUserService
     void CreateUser(UserCreateDTO userCreateDTO);
     bool UpdateUser(UserUpdateDTO userUpdateDto);
     bool DeleteUser(int userId);
+    void AddRole(UserRoleDTO userRoleDTO);
 }

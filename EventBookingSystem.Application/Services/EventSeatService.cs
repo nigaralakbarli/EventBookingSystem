@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EventBookingSystem.Application.DTOs.EventSeat.Response;
+using EventBookingSystem.Application.DTOs.Participant.Response;
 using EventBookingSystem.Application.Interfaces;
 using EventBookingSystem.Domain.Entities;
 using EventBookingSystem.Domain.Repositories.EntityRepositories;
@@ -97,4 +98,10 @@ public class EventSeatService : IEventSeatService
         return _userRepository.GetById(Convert.ToInt32(userId));
     }
 
+    public List<ParticipantResponseDTO> GetMyBookings()
+    {
+        var userId = GetCurrentUserId();
+        return _mapper.Map<List<ParticipantResponseDTO>>(_participantRepository
+            .Find(p => p.UserId == userId).ToList());
+    }
 }

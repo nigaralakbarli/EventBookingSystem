@@ -24,6 +24,11 @@ namespace EventBookingSystem.Persistence.Context.SeedData
                      Id = 2,
                      Name = "User"
                 },
+                new Role()
+                {
+                     Id = 3,
+                     Name = "Manager"
+                }
             };
             return roles;
         }

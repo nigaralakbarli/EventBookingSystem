@@ -3,7 +3,9 @@ using EventBookingSystem.Application.DTOs.EventEvaluation.Request;
 using EventBookingSystem.Application.Interfaces;
 using EventBookingSystem.Application.Services;
 using EventBookingSystem.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace EventBookingSystem.WebApi.Controllers;
 
@@ -19,6 +21,9 @@ public class EventEvaluationController : ControllerBase
         _eventEvaluationService = eventEvaluationService;
     }
 
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("GetAll")]
     [HttpGet]
     public IActionResult GetAllEvaluations()
@@ -26,6 +31,9 @@ public class EventEvaluationController : ControllerBase
         return Ok(_eventEvaluationService.GetEventEvaluations());
     }
 
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("GetById")]
     [HttpGet]
     public IActionResult GetEvaluationById(int evaluationId)
@@ -33,6 +41,9 @@ public class EventEvaluationController : ControllerBase
         return Ok(_eventEvaluationService.GetEventEvaluationById(evaluationId));
     }
 
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
+    [Authorize(Roles = "User")]
     [Route("Create")]
     [HttpPost]
     public IActionResult CreateEvaluation(EventEvaluationRequestDTO eventEvaluationRequestDTO)
@@ -41,6 +52,7 @@ public class EventEvaluationController : ControllerBase
         return Ok("Successfully created");
     }
 
+    [Authorize(Roles = "Admin")]
     [Route("Delete")]
     [HttpDelete]
     public IActionResult DeleteEvaluation(int evaluationId)
@@ -52,7 +64,8 @@ public class EventEvaluationController : ControllerBase
         return BadRequest($"Evaluation with ID {evaluationId} not found.");
     }
 
-    [Route("Delete")]
+    [Authorize(Roles = "Admin")]
+    [Route("Update")]
     [HttpPut]
     public IActionResult UpdateEvaluation(EventEvaluationRequestDTO eventEvaluationRequestDTO)
     {

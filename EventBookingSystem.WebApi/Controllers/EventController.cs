@@ -2,6 +2,7 @@
 using EventBookingSystem.Application.DTOs.Event.Request;
 using EventBookingSystem.Application.Interfaces;
 using EventBookingSystem.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,10 @@ public class EventController : ControllerBase
         _eventService = eventService;
     }
 
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
+    [Authorize(Roles = "User")]
     [Route("GetAll")]
     [HttpGet]
     public IActionResult GetAll() 
@@ -24,6 +29,10 @@ public class EventController : ControllerBase
         return Ok(_eventService.GetEvents());
     }
 
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
+    [Authorize(Roles = "User")]
     [Route("GetById")]
     [HttpGet]
     public IActionResult GetById(int eventId)
@@ -32,6 +41,8 @@ public class EventController : ControllerBase
     }
 
 
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("Create")]
     [HttpPost]
     public IActionResult CreateEvent(EventCreateDTO eventCreateDTO)
@@ -40,6 +51,9 @@ public class EventController : ControllerBase
         return Ok("Successfully created");
     }
 
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("Update")]
     [HttpPut]
     public IActionResult UpdateEvent(EventUpdateDTO eventUpdateDTO)
@@ -51,6 +65,9 @@ public class EventController : ControllerBase
         return BadRequest($"Event with ID {eventUpdateDTO.Id} not found.");
     }
 
+
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Route("Delete")]
     [HttpDelete]
     public IActionResult DeleteEvent(int eventId)

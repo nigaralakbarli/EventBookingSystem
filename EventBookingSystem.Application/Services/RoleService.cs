@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using EventBookingSystem.Application.DTOs.Category.Request;
 using EventBookingSystem.Application.DTOs.Role.Request;
 using EventBookingSystem.Application.DTOs.Role.Response;
 using EventBookingSystem.Application.Interfaces;
 using EventBookingSystem.Domain.Entities;
 using EventBookingSystem.Domain.Repositories.EntityRepositories;
-using EventBookingSystem.Persistence.Repositories.EntityRepositories;
 
 namespace EventBookingSystem.Application.Services;
 
@@ -61,4 +59,6 @@ public class RoleService : IRoleService
         }
         return false;
     }
+
+
 }

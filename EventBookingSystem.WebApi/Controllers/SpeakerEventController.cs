@@ -45,7 +45,7 @@ public class SpeakerEventController : ControllerBase
 
     //[Authorize(Roles = "Admin")]
     [Route("Update")]
-    [HttpPost]
+    [HttpPut]
     public IActionResult UpdateSpeakerEvent(SpeakerEventRequestDTO speakerEventRequestDTO)
     {
         if (_speakerEventService.UpdateSpeakerEvent(speakerEventRequestDTO))

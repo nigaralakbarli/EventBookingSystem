@@ -17,14 +17,34 @@ namespace EventBookingSystem.Persistence.Context.SeedData
                  new Category()
                 {
                     Id = 1,
-                    Name = "Test"
+                    Name = "Career Development"
                 },
 
-                  new Category()
+                 new Category()
                 {
                    Id = 2,
-                   Name = "Test1"
+                   Name = "Social Activities"
                 },
+                new Category()
+                {
+                   Id = 3,
+                   Name = "Study Abroad"
+                },
+                new Category()
+                {
+                   Id = 4,
+                   Name = "Computer Science"
+                },
+                new Category()
+                {
+                   Id = 5,
+                   Name = "Information Security"
+                },
+                new Category()
+                {
+                   Id = 6,
+                   Name = "Artificial Intelligence"
+                }
             };
             return categories;
         }

@@ -51,7 +51,7 @@ public class ParticipantController : ControllerBase
 
     //[Authorize(Roles = "Admin")]
     [Route("Update")]
-    [HttpPost]
+    [HttpPut]
     public IActionResult UpdateParticipant(ParticipantRequestDTO participantRequestDTO)
     {
         if (_participantService.UpdateParticipant(participantRequestDTO))

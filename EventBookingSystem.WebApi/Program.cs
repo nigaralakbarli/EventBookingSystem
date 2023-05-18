@@ -1,10 +1,7 @@
 using EventBookingSystem.Application.Helper.ExcelFile;
 using EventBookingSystem.Application.Interfaces;
 using EventBookingSystem.Application.Services;
-using EventBookingSystem.Domain.Entities;
-using EventBookingSystem.Domain.Repositories;
 using EventBookingSystem.Domain.Repositories.EntityRepositories;
-using EventBookingSystem.Persistence.Repositories;
 using EventBookingSystem.Persistence.Repositories.EntityRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;

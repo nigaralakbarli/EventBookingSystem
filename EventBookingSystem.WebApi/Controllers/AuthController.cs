@@ -16,7 +16,13 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-
+    [Route("/Registration")]
+    [HttpPost]
+    public IActionResult Registration(RegistrationDTO registrationDTO)
+    {
+        var message = _authService.Registration(registrationDTO);
+        return Ok(message);
+    }
     [Route("/Login")]
     [AllowAnonymous]
     [HttpPost]
@@ -30,12 +36,4 @@ public class AuthController : ControllerBase
         return NotFound("User not found");
     }
 
-    [Route("/Registration")]
-    [HttpPost]
-
-    public IActionResult Registration(RegistrationDTO registrationDTO) 
-    {
-        var message = _authService.Registration(registrationDTO);
-        return Ok(message);
-    }
 }

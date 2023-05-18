@@ -1,15 +1,19 @@
 ﻿using AutoMapper;
 using EventBookingSystem.Application.DTOs.Authentication.Request;
+using EventBookingSystem.Application.DTOs.Participant.Response;
+using EventBookingSystem.Application.DTOs.Role.Request;
 using EventBookingSystem.Application.DTOs.User.Request;
 using EventBookingSystem.Application.DTOs.User.Response;
 using EventBookingSystem.Application.Interfaces;
 using EventBookingSystem.Domain.Entities;
 using EventBookingSystem.Domain.Repositories.EntityRepositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,10 +23,20 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
-    public UserService(IUserRepository userRepository, IMapper mapper)
+    private readonly IParticipantRepository _participantRepository;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+
+    public UserService(
+        IUserRepository userRepository, 
+        IMapper mapper,
+        IParticipantRepository participantRepository,
+        IHttpContextAccessor httpContextAccessor)
     {
         _userRepository = userRepository;
         _mapper = mapper;
+        _participantRepository = participantRepository;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public List<UserResponseDTO> GetUsers()
@@ -65,5 +79,18 @@ public class UserService : IUserService
     {
         var user = _mapper.Map<User>(userCreateDTO);
         _userRepository.Add(user);
+    }
+
+    public List<ParticipantResponseDTO> GetMyBookings()
+    {
+        var currentUserId = Convert.ToInt32(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        return _mapper.Map<List<ParticipantResponseDTO>>(_participantRepository.Find(p => p.UserId == currentUserId));
+    }
+
+    public void AddRole(UserRoleDTO userRoleDTO)
+    {
+        var user = _userRepository.GetById(userRoleDTO.UserId);
+        user.RoleId = userRoleDTO.RoleId;
+        _userRepository.Update(user);
     }
 }

@@ -16,17 +16,24 @@ namespace EventBookingSystem.Persistence.Context.SeedData
                 new Venue()
                 {
                     Id = 1,
-                    Name = "Akt zalı",
-                    Capacity = 50, //400
-                    RowCapacity = 10,
+                    Name = "Event Hall",
+                    Capacity = 400, 
+                    RowCapacity = 16,
                 }
                 ,
                 new Venue()
                 {
                     Id = 2,
-                    Name = "Otaq 201",
-                    Capacity = 20, //400
-                    RowCapacity = 5,
+                    Name = "Room 201",
+                    Capacity = 100,
+                    RowCapacity = 10,
+                },
+                new Venue()
+                {
+                    Id = 3,
+                    Name = "Room 506",
+                    Capacity = 80,
+                    RowCapacity = 10,
                 }
             };
             return venues;

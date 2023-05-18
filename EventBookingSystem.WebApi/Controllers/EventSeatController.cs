@@ -51,4 +51,10 @@ public class EventSeatController : ControllerBase
         return BadRequest("Seat is not booked");
     }
 
+    [Route("GetMyBookings")]
+    [HttpGet]
+    public IActionResult GetMyBookings()
+    {
+        return Ok(_eventSeatService.GetMyBookings());
+    }
 }

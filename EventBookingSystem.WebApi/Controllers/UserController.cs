@@ -1,4 +1,5 @@
-﻿using EventBookingSystem.Application.DTOs.User.Request;
+﻿using EventBookingSystem.Application.DTOs.Role.Request;
+using EventBookingSystem.Application.DTOs.User.Request;
 using EventBookingSystem.Application.Interfaces;
 using EventBookingSystem.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +19,7 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("GetAll")]
     [HttpGet]
     public IActionResult GetUsers()
@@ -26,7 +27,7 @@ public class UserController : ControllerBase
         return Ok(_userService.GetUsers());
     }
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("GetById")]
     [HttpGet]
     public IActionResult GetUserById(int id)
@@ -34,7 +35,7 @@ public class UserController : ControllerBase
         return Ok(_userService.GetUserById(id));
     }
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("Create")]
     [HttpPost]
     public IActionResult Create(UserCreateDTO userCreateDTO)
@@ -43,9 +44,9 @@ public class UserController : ControllerBase
         return Ok("Successfully created");
     }
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("Update")]
-    [HttpPost]
+    [HttpPut]
     public IActionResult Update(UserUpdateDTO userUpdateDTO)
     {
         if (_userService.UpdateUser(userUpdateDTO))
@@ -55,7 +56,7 @@ public class UserController : ControllerBase
         return BadRequest($"User with ID {userUpdateDTO.Id} not found.");
     }
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [Route("Delete")]
     [HttpDelete]
     public IActionResult DeleteUser(int userId)
@@ -65,5 +66,14 @@ public class UserController : ControllerBase
             return Ok("Successfully deleted");
         }
         return BadRequest($"User with ID {userId} not found.");
+    }
+
+    [Authorize(Roles = "Admin")]
+    [Route("AddRole")]
+    [HttpPut]
+    public IActionResult AddRole([FromQuery] UserRoleDTO userRoleDTO)
+    {
+        _userService.AddRole(userRoleDTO);
+        return Ok();
     }
 }
